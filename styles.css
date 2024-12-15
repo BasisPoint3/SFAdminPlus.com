@@ -1,0 +1,184 @@
+/* Global styles */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+.slds-global-header {
+    background-color: #0176D3;
+    color: white;
+    padding: 1rem;
+}
+
+.slds-global-header a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Section styles */
+.hero-section {
+    background-color: #f3f3f3;
+    padding: 4rem 2rem;
+}
+
+/* Feature card hover effects */
+.slds-box_link {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.slds-box_link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+/* Pricing section styles */
+.pricing-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card .slds-button {
+    margin-top: auto;
+}
+
+/* Footer styles */
+.custom-footer {
+    background-color: #f3f3f3;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem 1rem;
+    }
+    
+    .slds-global-header {
+        padding: 0.5rem;
+    }
+    
+    .slds-button_stretch {
+        width: 100%;
+    }
+} 
+
+/* Add these new styles to your existing styles.css file */
+
+/* Active nav link */
+.slds-global-header a.active {
+    font-weight: bold;
+    border-bottom: 2px solid white;
+}
+
+/* Feature card styles */
+.feature-card {
+    transition: transform 0.2s ease-in-out;
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Pricing card styles */
+.pricing-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.pricing-card .slds-button {
+    margin-top: auto;
+}
+
+.pricing-card ul {
+    margin: 2rem 0;
+}
+
+.pricing-card ul li {
+    margin: 0.5rem 0;
+}
+
+/* About page styles */
+.about-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .slds-global-header nav {
+        display: none;
+    }
+    
+    .slds-global-header nav.mobile-active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #0176D3;
+        padding: 1rem;
+    }
+} 
+
+/* Add these mobile navigation styles */
+.mobile-menu-button {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.mobile-menu-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Update responsive adjustments */
+@media (max-width: 768px) {
+    .slds-global-header nav.desktop-nav {
+        display: none;
+    }
+
+    .mobile-menu-button {
+        display: block;
+    }
+
+    .mobile-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #0176D3;
+        padding: 1rem;
+        z-index: 1000;
+    }
+
+    .mobile-nav.show {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobile-nav a {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav a:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-nav .slds-button {
+        margin: 0.75rem 1rem;
+    }
+} 
