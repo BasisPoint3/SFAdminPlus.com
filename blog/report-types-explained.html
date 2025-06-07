@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Salesforce Report Types - Custom Reports Guide</title>
+    <meta name="description" content="Demystifying custom report types in Salesforce. Learn when to use them and how to create powerful reports that give users the insights they need.">
+    <meta name="keywords" content="Salesforce report types, custom report types, Salesforce reporting, admin guide, data analysis">
+    <meta name="author" content="David Park">
+    <link rel="canonical" href="https://yourdomain.com/blog/report-types-explained.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yourdomain.com/blog/report-types-explained.html">
+    <meta property="og:title" content="Understanding Salesforce Report Types">
+    <meta property="og:description" content="Demystifying custom report types and when to use them for powerful Salesforce reporting.">
+    <meta property="article:published_time" content="2023-12-28T09:00:00Z">
+    <meta property="article:author" content="David Park">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Understanding Salesforce Report Types",
+        "description": "Demystifying custom report types in Salesforce. Learn when to use them and how to create powerful reports that give users the insights they need.",
+        "datePublished": "2023-12-28T09:00:00Z",
+        "dateModified": "2023-12-28T09:00:00Z",
+        "author": {
+            "@type": "Person",
+            "name": "David Park"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "SF Admin Tools",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://yourdomain.com/assets/images/logo.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/blog/report-types-explained.html"
+        }
+    }
+    </script>
+    
+    <!-- Flowbite CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 shadow">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+            <a href="/" class="flex items-center">
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">SF Admin Tools</span>
+            </a>
+            <div class="flex items-center lg:order-2">
+                <a href="/#extensions" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Get Extensions</a>
+                <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+            <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                    <li>
+                        <a href="/" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Home</a>
+                    </li>
+                    <li>
+                        <a href="/#extensions" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Extensions</a>
+                    </li>
+                    <li>
+                        <a href="/blog.html" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Blog</a>
+                    </li>
+                    <li>
+                        <a href="/about.html" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900">
+        <div class="flex justify-between px-4 mx-auto max-w-screen-xl">
+            <article class="mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                <!-- Breadcrumb -->
+                <nav class="flex mb-8" aria-label="Breadcrumb">
+                    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                        <li class="inline-flex items-center">
+                            <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                </svg>
+                                <a href="/blog.html" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Blog</a>
+                            </div>
+                        </li>
+                        <li aria-current="page">
+                            <div class="flex items-center">
+                                <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                </svg>
+                                <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">Report Types</span>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+
+                <!-- Article Header -->
+                <header class="mb-4 lg:mb-6 not-format">
+                    <address class="flex items-center mb-6 not-italic">
+                        <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                            <div>
+                                <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">David Park</a>
+                                <p class="text-base font-light text-gray-500 dark:text-gray-400">Salesforce Analytics Expert</p>
+                                <p class="text-base font-light text-gray-500 dark:text-gray-400"><time pubdate datetime="2023-12-28" title="December 28th, 2023">Dec. 28, 2023</time></p>
+                            </div>
+                        </div>
+                    </address>
+                    <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">Understanding Salesforce Report Types: A Quick Guide</h1>
+                </header>
+
+                <!-- Article Content -->
+                <div class="prose prose-lg max-w-none">
+                    <p class="lead mb-6">Report types determine which objects and fields are available when creating reports in Salesforce. While standard report types cover many use cases, custom report types unlock powerful reporting capabilities for your specific business needs.</p>
+
+                    <h2 class="text-2xl font-bold mb-4 mt-8">Standard vs Custom Report Types</h2>
+                    
+                    <h3 class="text-xl font-semibold mb-3">Standard Report Types</h3>
+                    <p class="mb-6">Salesforce provides pre-built report types for common object relationships like:</p>
+                    <ul class="list-disc list-inside mb-6 space-y-2">
+                        <li>Accounts with Contacts</li>
+                        <li>Opportunities with Products</li>
+                        <li>Cases with Activities</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold mb-3">Custom Report Types</h3>
+                    <p class="mb-6">Custom report types let you:</p>
+                    <ul class="list-disc list-inside mb-6 space-y-2">
+                        <li>Define specific object relationships</li>
+                        <li>Control which fields are available</li>
+                        <li>Create intuitive layouts for users</li>
+                        <li>Include up to 4 related objects</li>
+                    </ul>
+
+                    <h2 class="text-2xl font-bold mb-4 mt-8">When to Create Custom Report Types</h2>
+                    
+                    <div class="p-4 mb-6 bg-blue-50 rounded-lg dark:bg-blue-900">
+                        <p class="text-blue-800 dark:text-blue-200">Create custom report types when standard ones don't meet your needs or when you want to simplify reporting for users by pre-selecting relevant fields.</p>
+                    </div>
+
+                    <h3 class="text-xl font-semibold mb-3">Common Scenarios:</h3>
+                    <ul class="list-disc list-inside mb-6 space-y-2">
+                        <li>Reporting on custom objects</li>
+                        <li>Complex multi-object relationships</li>
+                        <li>Limiting fields for simplicity</li>
+                        <li>Creating department-specific views</li>
+                    </ul>
+
+                    <h2 class="text-2xl font-bold mb-4 mt-8">Creating Effective Custom Report Types</h2>
+
+                    <h3 class="text-xl font-semibold mb-3">Step 1: Plan Your Relationships</h3>
+                    <p class="mb-6">Map out which objects you need and how they relate. Remember:</p>
+                    <ul class="list-disc list-inside mb-6 space-y-2">
+                        <li>Primary object (A) is required</li>
+                        <li>Related objects (B, C, D) are optional</li>
+                        <li>Each relationship can be "with" or "with or without"</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold mb-3">Step 2: Choose Your Fields</h3>
+                    <p class="mb-6">Select only relevant fields to avoid overwhelming users. Group them logically and use clear labels.</p>
+
+                    <h3 class="text-xl font-semibold mb-3">Step 3: Test Thoroughly</h3>
+                    <p class="mb-6">Create sample reports to ensure the report type returns expected data and performs well with large datasets.</p>
+
+                    <h2 class="text-2xl font-bold mb-4 mt-8">Best Practices</h2>
+                    <ul class="list-disc list-inside mb-6 space-y-2">
+                        <li><strong>Name Clearly:</strong> Use descriptive names like "Accounts with Open Cases and Activities"</li>
+                        <li><strong>Document Purpose:</strong> Add descriptions explaining when to use each report type</li>
+                        <li><strong>Organize Fields:</strong> Group related fields and remove unnecessary ones</li>
+                        <li><strong>Consider Performance:</strong> Limit objects and fields for faster reports</li>
+                        <li><strong>Review Regularly:</strong> Update report types as your data model evolves</li>
+                    </ul>
+
+                    <div class="p-4 mb-6 bg-green-50 rounded-lg dark:bg-green-900">
+                        <h3 class="text-lg font-semibold mb-2 text-green-800 dark:text-green-200">Quick Tip</h3>
+                        <p class="text-green-700 dark:text-green-300">Use "with or without" relationships to include primary records even when related records don't exist. This is perfect for finding accounts without opportunities or contacts without cases.</p>
+                    </div>
+
+                    <h2 class="text-2xl font-bold mb-4 mt-8">Common Pitfalls to Avoid</h2>
+                    <ul class="list-disc list-inside mb-6 space-y-2">
+                        <li>Creating too many similar report types</li>
+                        <li>Including all fields "just in case"</li>
+                        <li>Forgetting to deploy to all users</li>
+                        <li>Not considering report performance</li>
+                    </ul>
+
+                    <h2 class="text-2xl font-bold mb-4 mt-8">Conclusion</h2>
+                    <p class="mb-6">Custom report types are powerful tools for tailoring Salesforce reporting to your organization's needs. By thoughtfully designing report types, you empower users to gain insights quickly without needing advanced report-building skills.</p>
+
+                    <p class="mb-6">Start simple, gather feedback, and iterate. Your users will appreciate report types that make their data analysis faster and more intuitive.</p>
+                </div>
+
+                <!-- Author Bio -->
+                <div class="mt-12 p-6 bg-gray-100 rounded-lg dark:bg-gray-800">
+                    <h3 class="text-lg font-semibold mb-2">About the Author</h3>
+                    <p class="text-gray-700 dark:text-gray-300">David Park is a Salesforce Analytics Expert with 7 years of experience helping organizations unlock insights from their CRM data. He specializes in reporting strategies and dashboard design.</p>
+                </div>
+
+                <!-- Related Articles -->
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold mb-6">Related Articles</h3>
+                    <div class="grid gap-6 lg:grid-cols-2">
+                        <a href="/blog/validation-rules-guide.html" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <h4 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">The Complete Guide to Validation Rules</h4>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">Master the art of creating effective validation rules that improve data quality.</p>
+                        </a>
+                        <a href="/blog/flow-optimization-tips.html" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <h4 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">10 Tips for Optimizing Salesforce Flows</h4>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">Discover proven techniques to make your Salesforce Flows run faster and more efficiently.</p>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-4 bg-gray-800 md:p-8 lg:p-10 dark:bg-gray-900">
+        <div class="mx-auto max-w-screen-xl text-center">
+            <a href="#" class="flex justify-center items-center text-2xl font-semibold text-white">
+                SF Admin Tools    
+            </a>
+            <p class="my-6 text-gray-400">Empowering Salesforce Administrators with powerful browser extensions.</p>
+            <ul class="flex flex-wrap justify-center items-center mb-6 text-white">
+                <li>
+                    <a href="/" class="mr-4 hover:underline md:mr-6">Home</a>
+                </li>
+                <li>
+                    <a href="/#extensions" class="mr-4 hover:underline md:mr-6">Extensions</a>
+                </li>
+                <li>
+                    <a href="/blog.html" class="mr-4 hover:underline md:mr-6">Blog</a>
+                </li>
+                <li>
+                    <a href="/about.html" class="mr-4 hover:underline md:mr-6">About</a>
+                </li>
+            </ul>
+            <span class="text-sm text-gray-400 sm:text-center">© 2024 SF Admin Tools. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Flowbite JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+</body>
+</html>

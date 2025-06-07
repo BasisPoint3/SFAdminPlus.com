@@ -1,0 +1,100 @@
+/* Custom styles for SF Admin Tools website */
+
+/* Smooth scrolling for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom focus styles for better accessibility */
+*:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Ensure images are responsive */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Custom styles for blog content */
+.prose img {
+    margin: 2rem auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Improve readability for blog posts */
+.prose {
+    font-size: 1.125rem;
+    line-height: 1.75;
+}
+
+.prose h2 {
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.prose h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Custom animation for hover effects */
+.hover\:scale-105:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Better link styles in dark mode */
+.dark a:hover {
+    color: #60a5fa;
+}
+
+/* Custom styles for code blocks if needed */
+.prose pre {
+    background-color: #1f2937;
+    color: #e5e7eb;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+}
+
+.prose code {
+    background-color: #f3f4f6;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.dark .prose code {
+    background-color: #374151;
+    color: #e5e7eb;
+}
+
+/* Responsive iframe for embedded content */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Print styles */
+@media print {
+    nav, footer, .no-print {
+        display: none;
+    }
+    
+    .prose {
+        max-width: 100%;
+    }
+}

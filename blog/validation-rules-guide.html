@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Complete Guide to Validation Rules - Salesforce Admin</title>
+    <meta name="description" content="Master the art of creating effective validation rules in Salesforce. Learn patterns, best practices, and real-world examples for improving data quality.">
+    <meta name="keywords" content="Salesforce validation rules, data quality, Salesforce admin, validation rule examples, error messages">
+    <meta name="author" content="Lisa Rodriguez">
+    <link rel="canonical" href="https://yourdomain.com/blog/validation-rules-guide.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yourdomain.com/blog/validation-rules-guide.html">
+    <meta property="og:title" content="The Complete Guide to Validation Rules">
+    <meta property="og:description" content="Master the art of creating effective validation rules that improve data quality without frustrating users.">
+    <meta property="article:published_time" content="2024-01-05T09:00:00Z">
+    <meta property="article:author" content="Lisa Rodriguez">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "The Complete Guide to Validation Rules",
+        "description": "Master the art of creating effective validation rules in Salesforce. Learn patterns, best practices, and real-world examples for improving data quality.",
+        "datePublished": "2024-01-05T09:00:00Z",
+        "dateModified": "2024-01-05T09:00:00Z",
+        "author": {
+            "@type": "Person",
+            "name": "Lisa Rodriguez"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "SF Admin Tools",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://yourdomain.com/assets/images/logo.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/blog/validation-rules-guide.html"
+        }
+    }
+    </script>
+    
+    <!-- Flowbite CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 shadow">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+            <a href="/" class="flex items-center">
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">SF Admin Tools</span>
+            </a>
+            <div class="flex items-center lg:order-2">
+                <a href="/#extensions" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Get Extensions</a>
+                <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+            <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                    <li>
+                        <a href="/" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Home</a>
+                    </li>
+                    <li>
+                        <a href="/#extensions" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Extensions</a>
+                    </li>
+                    <li>
+                        <a href="/blog.html" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Blog</a>
+                    </li>
+                    <li>
+                        <a href="/about.html" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900">
+        <div class="flex justify-between px-4 mx-auto max-w-screen-xl">
+            <article class="mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                <!-- Breadcrumb -->
+                <nav class="flex mb-8" aria-label="Breadcrumb">
+                    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                        <li class="inline-flex items-center">
+                            <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                </svg>
+                                <a href="/blog.html" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Blog</a>
+                            </div>
+                        </li>
+                        <li aria-current="page">
+                            <div class="flex items-center">
+                                <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                </svg>
+                                <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">Validation Rules</span>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+
+                <!-- Article Header -->
+                <header class="mb-4 lg:mb-6 not-format">
+                    <address class="flex items-center mb-6 not-italic">
+                        <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                            <div>
+                                <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">Lisa Rodriguez</a>
+                                <p class="text-base font-light text-gray-500 dark:text-gray-400">Salesforce Solution Architect</p>
+                                <p class="text-base font-light text-gray-500 dark:text-gray-400"><time pubdate datetime="2024-01-05" title="January 5th, 2024">Jan. 5, 2024</time></p>
+                            </div>
+                        </div>
+                    </address>
+                    <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">The Complete Guide to Validation Rules in Salesforce</h1>
+                </header>
+
+                <!-- Table of Contents -->
+                <div class="mb-8 p-6 bg-gray-50 rounded-lg dark:bg-gray-800">
+                    <h2 class="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Table of Contents</h2>
+                    <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                        <li><a href="#what-are-validation-rules" class="hover:text-blue-600 dark:hover:text-blue-500">What Are Validation Rules?</a></li>
+                        <li><a href="#when-to-use" class="hover:text-blue-600 dark:hover:text-blue-500">When to Use Validation Rules</a></li>
+                        <li><a href="#formula-basics" class="hover:text-blue-600 dark:hover:text-blue-500">Formula Basics</a></li>
+                        <li><a href="#common-patterns" class="hover:text-blue-600 dark:hover:text-blue-500">Common Validation Patterns</a></li>
+                        <li><a href="#error-messages" class="hover:text-blue-600 dark:hover:text-blue-500">Writing Effective Error Messages</a></li>
+                        <li><a href="#best-practices" class="hover:text-blue-600 dark:hover:text-blue-500">Best Practices</a></li>
+                        <li><a href="#examples" class="hover:text-blue-600 dark:hover:text-blue-500">Real-World Examples</a></li>
+                    </ul>
+                </div>
+
+                <!-- Article Content -->
+                <div class="prose prose-lg max-w-none">
+                    <h2 id="what-are-validation-rules" class="text-2xl font-bold mb-4">What Are Validation Rules?</h2>
+                    <p class="mb-6">Validation rules in Salesforce verify that the data users enter in records meets the standards you specify before they can save the record. They're one of the most powerful tools for maintaining data quality in your Salesforce org.</p>
+
+                    <p class="mb-6">When a validation rule evaluates to true, Salesforce displays an error message and prevents the record from being saved. This ensures data integrity without requiring code.</p>
+
+                    <h2 id="when-to-use" class="text-2xl font-bold mb-4 mt-8">When to Use Validation Rules</h2>
+                    <p class="mb-6">Validation rules are ideal for:</p>
+                    
+                    <ul class="list-disc list-inside mb-6 space-y-2">
+                        <li>Enforcing business logic that applies across all users</li>
+                        <li>Ensuring data completeness and accuracy</li>
+                        <li>Preventing invalid data combinations</li>
+                        <li>Maintaining consistency across related fields</li>
+                        <li>Implementing compliance requirements</li>
+                    </ul>
+
+                    <div class="p-4 mb-6 bg-yellow-50 rounded-lg dark:bg-yellow-900">
+                        <p class="text-yellow-800 dark:text-yellow-200"><strong>Important:</strong> Validation rules can't reference fields from other objects (except through Owner, CreatedBy, LastModifiedBy, or lookup relationships).</p>
+                    </div>
+
+                    <h2 id="formula-basics" class="text-2xl font-bold mb-4 mt-8">Formula Basics</h2>
+                    <p class="mb-6">Validation rule formulas must evaluate to TRUE when the data is invalid. This can be confusing at first—you're writing a formula for when the rule should fire, not when the data is valid.</p>
+
+                    <h3 class="text-xl font-semibold mb-3">Common Functions</h3>
+                    <ul class="list-disc list-inside mb-6 space-y-2">
+                        <li><code>ISBLANK()</code> - Checks if a field is empty</li>
+                        <li><code>ISNEW()</code> - True for new records</li>
+                        <li><code>ISCHANGED()</code> - True when a field value changes</li>
+                        <li><code>PRIORVALUE()</code> - Returns the previous value of a field</li>
+                        <li><code>AND()</code>, <code>OR()</code>, <code>NOT()</code> - Logical operators</li>
+                        <li><code>REGEX()</code> - Pattern matching for text validation</li>
+                    </ul>
+
+                    <h2 id="common-patterns" class="text-2xl font-bold mb-4 mt-8">Common Validation Patterns</h2>
+                    
+                    <h3 class="text-xl font-semibold mb-3">1. Required Field Combinations</h3>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-6 dark:bg-gray-800">
+                        <code class="text-sm">
+                        AND(<br>
+                        &nbsp;&nbsp;Stage = "Closed Won",<br>
+                        &nbsp;&nbsp;ISBLANK(Close_Reason__c)<br>
+                        )
+                        </code>
+                    </div>
+                    <p class="mb-6">This ensures a Close Reason is provided when an opportunity is marked as Closed Won.</p>
+
+                    <h3 class="text-xl font-semibold mb-3">2. Email Format Validation</h3>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-6 dark:bg-gray-800">
+                        <code class="text-sm">
+                        NOT(REGEX(Email__c, "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"))
+                        </code>
+                    </div>
+                    <p class="mb-6">Validates that an email field contains a properly formatted email address.</p>
+
+                    <h3 class="text-xl font-semibold mb-3">3. Date Validation</h3>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-6 dark:bg-gray-800">
+                        <code class="text-sm">
+                        End_Date__c < Start_Date__c
+                        </code>
+                    </div>
+                    <p class="mb-6">Ensures the end date is not before the start date.</p>
+
+                    <h3 class="text-xl font-semibold mb-3">4. Preventing Field Changes</h3>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-6 dark:bg-gray-800">
+                        <code class="text-sm">
+                        AND(<br>
+                        &nbsp;&nbsp;NOT(ISNEW()),<br>
+                        &nbsp;&nbsp;ISCHANGED(Account_Number__c),<br>
+                        &nbsp;&nbsp;$Profile.Name <> "System Administrator"<br>
+                        )
+                        </code>
+                    </div>
+                    <p class="mb-6">Prevents non-admins from changing the Account Number after creation.</p>
+
+                    <h2 id="error-messages" class="text-2xl font-bold mb-4 mt-8">Writing Effective Error Messages</h2>
+                    <p class="mb-6">Good error messages are crucial for user adoption. They should be:</p>
+
+                    <div class="grid gap-4 mb-6">
+                        <div class="p-4 bg-green-50 rounded-lg dark:bg-green-900">
+                            <h4 class="font-semibold text-green-800 dark:text-green-200 mb-2">✓ Clear and Specific</h4>
+                            <p class="text-green-700 dark:text-green-300">"Please enter a Close Date in the future. Opportunities cannot be closed in the past."</p>
+                        </div>
+                        
+                        <div class="p-4 bg-red-50 rounded-lg dark:bg-red-900">
+                            <h4 class="font-semibold text-red-800 dark:text-red-200 mb-2">✗ Vague and Technical</h4>
+                            <p class="text-red-700 dark:text-red-300">"Invalid date value in field."</p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-semibold mb-3">Error Message Best Practices:</h3>
+                    <ul class="list-disc list-inside mb-6 space-y-2">
+                        <li>Tell users what went wrong</li>
+                        <li>Explain how to fix it</li>
+                        <li>Use plain language, not technical jargon</li>
+                        <li>Be polite and helpful</li>
+                        <li>Consider the field location for error placement</li>
+                    </ul>
+
+                    <h2 id="best-practices" class="text-2xl font-bold mb-4 mt-8">Best Practices</h2>
+                    
+                    <h3 class="text-xl font-semibold mb-3">1. Keep It Simple</h3>
+                    <p class="mb-6">Complex validation rules are hard to maintain and can impact performance. If a rule becomes too complex, consider using Flow or Apex instead.</p>
+
+                    <h3 class="text-xl font-semibold mb-3">2. Document Your Rules</h3>
+                    <p class="mb-6">Use the Description field to explain why the rule exists and what business requirement it serves. Future admins (including yourself) will thank you.</p>
+
+                    <h3 class="text-xl font-semibold mb-3">3. Consider User Experience</h3>
+                    <p class="mb-6">Too many validation rules can frustrate users. Balance data quality needs with usability.</p>
+
+                    <h3 class="text-xl font-semibold mb-3">4. Test Thoroughly</h3>
+                    <p class="mb-6">Test validation rules with different profiles, record types, and data scenarios. Don't forget to test bulk operations.</p>
+
+                    <h3 class="text-xl font-semibold mb-3">5. Use Custom Permissions</h3>
+                    <p class="mb-6">For exceptions, use custom permissions instead of hard-coding profile names. This makes rules more maintainable.</p>
+
+                    <h2 id="examples" class="text-2xl font-bold mb-4 mt-8">Real-World Examples</h2>
+
+                    <h3 class="text-xl font-semibold mb-3">Example 1: Opportunity Validation</h3>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-6 dark:bg-gray-800">
+                        <p class="font-semibold mb-2">Rule Name: Opportunity_Amount_Required_Stage3</p>
+                        <p class="mb-2"><strong>Formula:</strong></p>
+                        <code class="text-sm">
+                        AND(<br>
+                        &nbsp;&nbsp;OR(<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;StageName = "Proposal/Price Quote",<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;StageName = "Negotiation/Review"<br>
+                        &nbsp;&nbsp;),<br>
+                        &nbsp;&nbsp;Amount <= 0<br>
+                        )
+                        </code>
+                        <p class="mt-2"><strong>Error Message:</strong> "Opportunities in Proposal or Negotiation stage must have an Amount greater than zero."</p>
+                    </div>
+
+                    <h3 class="text-xl font-semibold mb-3">Example 2: Contact Phone Validation</h3>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-6 dark:bg-gray-800">
+                        <p class="font-semibold mb-2">Rule Name: Contact_Phone_Format</p>
+                        <p class="mb-2"><strong>Formula:</strong></p>
+                        <code class="text-sm">
+                        AND(<br>
+                        &nbsp;&nbsp;NOT(ISBLANK(Phone)),<br>
+                        &nbsp;&nbsp;NOT(REGEX(Phone, "\\([0-9]{3}\\) [0-9]{3}-[0-9]{4}"))<br>
+                        )
+                        </code>
+                        <p class="mt-2"><strong>Error Message:</strong> "Phone number must be in format: (123) 456-7890"</p>
+                    </div>
+
+                    <h2 class="text-2xl font-bold mb-4 mt-8">Conclusion</h2>
+                    <p class="mb-6">Validation rules are a powerful tool for maintaining data quality in Salesforce. When used correctly, they ensure data integrity while providing clear guidance to users. Remember to balance strictness with usability, and always consider the user experience when implementing validation rules.</p>
+
+                    <p class="mb-6">By following the patterns and best practices in this guide, you'll create validation rules that protect your data without frustrating your users.</p>
+                </div>
+
+                <!-- Author Bio -->
+                <div class="mt-12 p-6 bg-gray-100 rounded-lg dark:bg-gray-800">
+                    <h3 class="text-lg font-semibold mb-2">About the Author</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Lisa Rodriguez is a Salesforce Solution Architect with 12 years of experience in CRM implementations. She specializes in data governance and has helped numerous organizations improve their data quality through effective validation strategies.</p>
+                </div>
+
+                <!-- Related Articles -->
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold mb-6">Related Articles</h3>
+                    <div class="grid gap-6 lg:grid-cols-2">
+                        <a href="/blog/field-permissions-best-practices.html" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <h4 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Mastering Field-Level Security in Salesforce</h4>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">Learn how to properly configure field-level security and permissions to ensure data integrity.</p>
+                        </a>
+                        <a href="/blog/flow-optimization-tips.html" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <h4 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">10 Tips for Optimizing Salesforce Flows</h4>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">Discover proven techniques to make your Salesforce Flows run faster and more efficiently.</p>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-4 bg-gray-800 md:p-8 lg:p-10 dark:bg-gray-900">
+        <div class="mx-auto max-w-screen-xl text-center">
+            <a href="#" class="flex justify-center items-center text-2xl font-semibold text-white">
+                SF Admin Tools    
+            </a>
+            <p class="my-6 text-gray-400">Empowering Salesforce Administrators with powerful browser extensions.</p>
+            <ul class="flex flex-wrap justify-center items-center mb-6 text-white">
+                <li>
+                    <a href="/" class="mr-4 hover:underline md:mr-6">Home</a>
+                </li>
+                <li>
+                    <a href="/#extensions" class="mr-4 hover:underline md:mr-6">Extensions</a>
+                </li>
+                <li>
+                    <a href="/blog.html" class="mr-4 hover:underline md:mr-6">Blog</a>
+                </li>
+                <li>
+                    <a href="/about.html" class="mr-4 hover:underline md:mr-6">About</a>
+                </li>
+            </ul>
+            <span class="text-sm text-gray-400 sm:text-center">© 2024 SF Admin Tools. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Flowbite JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+</body>
+</html>
