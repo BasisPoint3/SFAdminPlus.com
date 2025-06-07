@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesforce Login As User - Chrome Extension | Salesforce Admin Plus</title>
+    <meta name="description" content="Quickly and securely login as any user in Salesforce with one click. Perfect for admins who need to troubleshoot user issues or test permissions.">
+    <meta name="keywords" content="Salesforce login as user, Chrome extension, Salesforce admin, user impersonation, troubleshooting">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://basispoint3.github.io/SFAdminPlus.com/extensions/salesforce-login-as-user.html">
+    <meta property="og:title" content="Salesforce Login As User - Chrome Extension">
+    <meta property="og:description" content="Quickly and securely login as any user in Salesforce with one click.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://basispoint3.github.io/SFAdminPlus.com/extensions/salesforce-login-as-user.html">
+    <meta property="twitter:title" content="Salesforce Login As User - Chrome Extension">
+    <meta property="twitter:description" content="Quickly and securely login as any user in Salesforce with one click.">
+    
+    <!-- Flowbite CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 shadow">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+            <a href="/SFAdminPlus.com/" class="flex items-center">
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Salesforce Admin Plus</span>
+            </a>
+            <div class="flex items-center lg:order-2">
+                <a href="https://chrome.google.com/webstore" target="_blank" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Install Extension</a>
+                <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+            <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                    <li>
+                        <a href="/SFAdminPlus.com/" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Home</a>
+                    </li>
+                    <li>
+                        <a href="/SFAdminPlus.com/#extensions" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Extensions</a>
+                    </li>
+                    <li>
+                        <a href="/SFAdminPlus.com/blog.html" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Blog</a>
+                    </li>
+                    <li>
+                        <a href="/SFAdminPlus.com/about.html" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-white dark:bg-gray-900">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-12">
+            <div class="text-center mb-8 lg:mb-12">
+                <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Salesforce Login As User</h1>
+                <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Instantly login as any user in your Salesforce org. Perfect for troubleshooting permissions, testing user experiences, and providing better support.</p>
+                <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+                    <a href="https://chrome.google.com/webstore" target="_blank" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                        Add to Chrome
+                        <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </a>
+                    <a href="#features" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                        View Features
+                    </a>  
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="bg-gray-50 dark:bg-gray-800">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
+                <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Key Features</h2>
+                <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Everything you need to efficiently manage user sessions</p>
+            </div>
+            <div class="grid gap-8 lg:grid-cols-3">
+                <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-900 dark:border-gray-700">
+                    <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+                        <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">One-Click Login</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Login as any user directly from their user record page with a single click. No need to navigate through setup menus.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-900 dark:border-gray-700">
+                    <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+                        <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">Secure & Compliant</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Uses Salesforce's native login-as functionality. All actions are logged and audited according to your org's security policies.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-900 dark:border-gray-700">
+                    <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+                        <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">Visual Indicators</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Clear visual cues when you're logged in as another user. Never lose track of whose account you're viewing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="bg-white dark:bg-gray-900">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
+                <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">How It Works</h2>
+                <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Get started in seconds</p>
+            </div>
+            <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+                <div class="text-center">
+                    <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900 mx-auto">
+                        <span class="text-xl font-bold text-blue-600 dark:text-blue-300">1</span>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">Install Extension</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Add the extension to Chrome from the Web Store with one click.</p>
+                </div>
+                <div class="text-center">
+                    <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900 mx-auto">
+                        <span class="text-xl font-bold text-blue-600 dark:text-blue-300">2</span>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">Navigate to User</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Go to any user record in Salesforce that you need to troubleshoot.</p>
+                </div>
+                <div class="text-center">
+                    <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900 mx-auto">
+                        <span class="text-xl font-bold text-blue-600 dark:text-blue-300">3</span>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">Click Login Button</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Click the "Login as User" button added by the extension. You're instantly logged in!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="bg-gray-50 dark:bg-gray-800">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <div class="mx-auto max-w-screen-md text-center">
+                <h2 class="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white">Why Admins Love This Extension</h2>
+                <div class="grid gap-8 lg:grid-cols-2 mt-8">
+                    <div class="text-left">
+                        <h3 class="mb-2 text-xl font-bold dark:text-white">Save Time</h3>
+                        <p class="text-gray-500 dark:text-gray-400">No more navigating through Setup > Users > Login. Access user sessions instantly from their record page.</p>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="mb-2 text-xl font-bold dark:text-white">Better Support</h3>
+                        <p class="text-gray-500 dark:text-gray-400">See exactly what your users see. Troubleshoot permissions and visibility issues in real-time.</p>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="mb-2 text-xl font-bold dark:text-white">Test Efficiently</h3>
+                        <p class="text-gray-500 dark:text-gray-400">Quickly test different user profiles and permission sets without the hassle of multiple logins.</p>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="mb-2 text-xl font-bold dark:text-white">Stay Organized</h3>
+                        <p class="text-gray-500 dark:text-gray-400">Visual indicators ensure you always know which user context you're operating in.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-white dark:bg-gray-900">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+            <div class="mx-auto max-w-screen-sm text-center">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold leading-tight text-gray-900 dark:text-white">Ready to simplify user management?</h2>
+                <p class="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">Join thousands of Salesforce admins who save hours every week.</p>
+                <a href="https://chrome.google.com/webstore" target="_blank" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Install Now - It's Free</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="p-4 bg-gray-800 md:p-8 lg:p-10 dark:bg-gray-900">
+        <div class="mx-auto max-w-screen-xl text-center">
+            <a href="/SFAdminPlus.com/" class="flex justify-center items-center text-2xl font-semibold text-white">
+                Salesforce Admin Plus    
+            </a>
+            <p class="my-6 text-gray-400">Empowering Salesforce Administrators with powerful browser extensions.</p>
+            <ul class="flex flex-wrap justify-center items-center mb-6 text-white">
+                <li>
+                    <a href="/SFAdminPlus.com/" class="mr-4 hover:underline md:mr-6">Home</a>
+                </li>
+                <li>
+                    <a href="/SFAdminPlus.com/#extensions" class="mr-4 hover:underline md:mr-6">Extensions</a>
+                </li>
+                <li>
+                    <a href="/SFAdminPlus.com/blog.html" class="mr-4 hover:underline md:mr-6">Blog</a>
+                </li>
+                <li>
+                    <a href="/SFAdminPlus.com/about.html" class="mr-4 hover:underline md:mr-6">About</a>
+                </li>
+            </ul>
+            <span class="text-sm text-gray-400 sm:text-center">© 2024 Salesforce Admin Plus. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Flowbite JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+</body>
+</html>
